@@ -11,7 +11,7 @@ export default class Directory extends Component {
           title: 'hats',
           imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
           id: 1,
-          linkUrl: 'shop/hats'
+          linkUrl: 'hats'
         },
         {
           title: 'jackets',
@@ -45,9 +45,9 @@ export default class Directory extends Component {
   render() {
     return (
       <div className='directory-menu'>
-        {
-          this.state.sections.map(({title, imageUrl, id, size}) => (
-            <MenuItem key={id} title={title} imageUrl={imageUrl} size={ size}/>
+        {//by using ...otherSectionProps we save the other props in this value without declaring each of them as seperate variables
+          this.state.sections.map(({ id, ...otherSectionProps}) => (
+            <MenuItem key={id} {...otherSectionProps} />
           ))
         }
       </div>
