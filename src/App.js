@@ -3,21 +3,49 @@ import { Switch, Route } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Homepage from './pages/homepage/homepage.component';
 import Header from './components/header/header.component';
-
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import { auth } from './firebase/firebase.utils';
 import './App.css';
 
 
-function App() {
-  return (
-    <div >
-      <Header/>
-      <Switch>
-        <Route exact path='/' component={Homepage} />
-        <Route path='/shop' component={ShopPage} />
-        
- </Switch>
-    </div>
-  );
+class App extends React.Component  {
+
+  constructor() {
+    super();
+
+    this.state = {
+      currentUser: null
+    };
+  };
+
+  //Here I have a variable that will refer to the AuthStateChanged method
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    //this is a method with the auth class from firebase that keeps track of the users state
+    //this method returns another method: firebase.unsubscribe().
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+    });
+  };
+
+  componentWillUnmount() {
+    // when unsubscribeFromAuth() is called inside the componentWillUnmount, it now has the value of firebase.unsubscribe(), which executes, closing the session.
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div >
+        <Header user={ this.state.currentUser}/>
+        <Switch>
+          <Route exact path='/' component={Homepage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route path='/signin' component={SignInAndSignUpPage} />
+        </Switch>
+      </div>
+    );
 }
+};
 
 export default App;
