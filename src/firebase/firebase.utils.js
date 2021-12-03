@@ -12,6 +12,13 @@ const config = {
   measurementId: "G-KE71D083C7"
 };
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  console.log(firestore.doc('users/1223349'))
+
+};
+
 firebase.initializeApp(config);
 
 //this allows us to export out the firebase authentication
@@ -20,6 +27,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
+
 provider.setCustomParameters({
   prompt: 'select_account'
 });

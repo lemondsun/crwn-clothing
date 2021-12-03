@@ -23,7 +23,7 @@ export default function Header({user}) {
           user ?
             <div className='option' onClick={()=> auth.signOut()}> SIGN OUT</div>
             :
-            <Link className="option" to='/signin'></Link>
+            <Link className="option" to='/signin'>SIGN IN</Link>
         }
       </div>
     </div>
