@@ -1,10 +1,14 @@
-import React from 'react'
-import SignIn from '../../components/sign-in/sign-in.component'
+import React from 'react';
+import SignIn from '../../components/sign-in/sign-in.component';
+import SignUp from '../../components/sign-up/sign-up.component';
 
-import './sign-in-and-sign-up.styles.scss'
+import './sign-in-and-sign-up.styles.scss';
 
 export default function SignInAndSignUpPage() {
   return (
-   <SignIn/>
+    <div className='sign-in-and-sign-up'>
+    <SignIn />
+      <SignUp />
+      </div>
   )
-}
+};
