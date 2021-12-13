@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 import './header.styles.scss';
 
 
- const Header = ({currentUser}) =>  (
+const Header = ({ currentUser }) => (
+   
     <div className='header'>
       <Link to='/' className='logo-container' >
         <Logo className='logo'/>
@@ -22,7 +23,7 @@ import './header.styles.scss';
         CONTACT
         </Link>
         {
-          currentUser.userAuth !== null ?
+          currentUser && currentUser.userAuth !== null  ?
             <div className='option' onClick={()=> auth.signOut()}> SIGN OUT</div>
             :
             <Link className="option" to='/signin'>SIGN IN</Link>
