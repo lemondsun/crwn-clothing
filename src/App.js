@@ -5,23 +5,20 @@ import Homepage from './pages/homepage/homepage.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
+
 import './App.css';
 
 
+
 class App extends React.Component  {
-
-  constructor() {
-    super();
-
-    this.state = {
-      currentUser: null
-    };
-  };
 
   //Here I have a variable that will refer to the AuthStateChanged method
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     //this is a method with the auth class from firebase that keeps track of the users state
     //this method returns another method: firebase.unsubscribe().
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -29,16 +26,14 @@ class App extends React.Component  {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
+          setCurrentUser({
               id: snapShot.id,
               ...snapShot.data()
-            }
           });
         });
-      } else {
-        this.setState({ currentUser: userAuth });
-      }
+      } 
+        setCurrentUser({userAuth});
+      
     });
   };
 
@@ -50,7 +45,7 @@ class App extends React.Component  {
   render() {
     return (
       <div >
-        <Header user={ this.state.currentUser}/>
+        <Header/>
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route path='/shop' component={ShopPage} />
@@ -61,4 +56,8 @@ class App extends React.Component  {
 }
 };
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(App);

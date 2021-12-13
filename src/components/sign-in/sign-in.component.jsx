@@ -51,18 +51,18 @@ export default class SignIn extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <FormInput name='email' type='email' value={this.state.email} handleChange={this.handleChange} label='email' required />
-         
+        
           <FormInput name='password' type='password' value={this.state.password} handleChange={this.handleChange} label='password' required />
-         
+    
 <div className='buttons'>
           <CustomButton type='submit'>
             Sign In
           </CustomButton>
-       { /* below I add the property isGoogleSignIn so that the custom button can 
+      { /* below I add the property isGoogleSignIn so that the custom button can 
       use the prop to add to it's className, adjusting it's style
       It automatically passes a value of true
       */}
-          <CustomButton onClick={signInWithGoogle}  isGoogleSignIn>
+          <CustomButton type='button' onClick={signInWithGoogle}  isGoogleSignIn>
           Sign In With Google
         </CustomButton>
         </div>
