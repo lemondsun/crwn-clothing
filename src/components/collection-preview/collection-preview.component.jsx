@@ -11,8 +11,8 @@ export default function CollectionPreview({items, title}) {
         {
           //to make sure that we only display four items I filter only the items that are indexed at less that 4
           //then map through those four items to create the divs for each of them
-          items.filter((item, index)=> index<4).map(({id, ...otherItemProps}) => (
-            <CollectionItem key={id} {...otherItemProps}/>
+          items.filter((item, index)=> index<4).map(item=> (
+            <CollectionItem key={item.id} item={item}/>
           ))
         }
       </div>
