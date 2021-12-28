@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 //ReactComponent  tells the react app that we want a React component that renders a SVG, rather than its file name.
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+
 //higher order component that lets us modify our components with redux
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -42,10 +46,9 @@ const Header = ({ currentUser, hidden }) => (
   );
 
 //this function gets the state from our redux
-//below I destruct the nested props, getting the currentUser value and hidden value directly
-const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
-  currentUser,
-  hidden
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden
 });
 
   
