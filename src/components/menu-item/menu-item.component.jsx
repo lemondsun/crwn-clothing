@@ -29,3 +29,4 @@ const  MenuItem = ({title, imageUrl, size, history, linkUrl, match}) =>{
 }
 //Using withRouter gives use access to the history prop so that we wont have to pass history down through components that wont use them.
 export default withRouter(MenuItem);
+

@@ -6,7 +6,7 @@ import './collection-preview.styles.scss';
 export default function CollectionPreview({items, title}) {
   return (
     <div className='collection-preview' >
-      <h1 className='title'>{ title.toUpperCase()}</h1>
+      <h1 className='title'>{title.toUpperCase()}</h1>
       <div className='preview'>
         {
           //to make sure that we only display four items I filter only the items that are indexed at less that 4
